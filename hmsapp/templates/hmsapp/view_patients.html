@@ -1,0 +1,124 @@
+<!-- view_patients.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Patients - Health Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            flex: 1 1 calc(33.3333% - 20px);
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: left;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            margin-right: 10px; /* Add some spacing between buttons */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+
+        a.view-medical-records {
+            background: #2ecc71;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-right: 10px; /* Adjust spacing */
+        }
+
+        a.view-medical-records:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Existing Patients</h2>
+        
+        <ul>
+            {% for patient in patients %}
+                <li>
+                    <strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}<br>
+                    <strong>Date of Birth:</strong> {{ patient.date_of_birth }}<br>
+                    <strong>Contact Number:</strong> {{ patient.contact_number }}<br>
+                    
+                    <!-- Update Button -->
+                    <a href="{% url 'update_patient' patient.id %}">Update</a>
+                    
+                    <!-- Delete Button -->
+                    <form method="post" action="{% url 'delete_patient' patient.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                    <!-- View Medical Records Button -->
+                    <a href="{% url 'view_medical_records' patient.id %}">View Medical Records</a>
+                    <!-- Display Medical Records -->
+    
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

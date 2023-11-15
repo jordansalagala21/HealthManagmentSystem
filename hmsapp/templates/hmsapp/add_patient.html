@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient - Health Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #333;
+            text-align: center;
+        }
+
+        .form-content {
+            padding: 20px;
+        }
+
+        /* Style for the form fields */
+        form label {
+            font-weight: 600;
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="tel"],
+        form input[type="email"],
+        form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background: #f5f5f5;
+        }
+
+        form select {
+            appearance: none;
+            padding: 10px;
+        }
+
+        /* Style for buttons */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: #2ecc71;
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-family: Arial;
+            cursor: pointer;
+        }
+
+        .btn:first-child {
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add a Patient</h2>
+
+        <form method="post" class="form-content">
+            {% csrf_token %}
+            <label for="id_first_name">First Name:</label>
+            {{ form.first_name }}
+            <label for="id_last_name">Last Name:</label>
+            {{ form.last_name }}
+            <label for="id_date_of_birth">Date of Birth:</label>
+            {{ form.date_of_birth }}
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+            <label for="id_blood_group">Blood Group:</label>
+            {{ form.blood_group }}
+            <label for="id_contact_number">Contact Number:</label>
+            {{ form.contact_number }}
+            
+            <div class="btn-container">
+                <button type="submit" class="btn">Upload Patient Details</button>
+                <a class="btn" href="{% url 'add_medical_record' %}">Upload Medical Details</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

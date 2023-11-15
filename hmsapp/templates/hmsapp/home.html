@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #3b5998;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #3b5998;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2d427f;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Add dynamic background to the container */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3b5998, #f2f2f2);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Health Management System</h1>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to the Health Management System</h2>
+        <p class="welcome-text">Easily manage patient records and medical information.</p>
+        <p>Choose an action:</p>
+        <a class="btn" href="{% url 'add_patient' %}">Add a Patient</a>
+        <a class="btn" href="{% url 'add_medical_record' %}">Add a Medical Record</a>
+        <a class="btn" href="{% url 'view_patients' %}">View Patients</a>
+    </div>
+</body>
+</html>

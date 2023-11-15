@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Records - Health Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            flex: 1 1 calc(33.3333% - 20px);
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: left;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+        }
+
+        strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        /* Style for the "Update" button */
+        .update-button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .update-button:hover {
+            background: #2980b9;
+        }
+
+        /* Style for the "Add Medical Records" button */
+        .add-records-button {
+            background: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .add-records-button:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Medical Records for {{ patient.first_name }} {{ patient.last_name }}</h2>
+        
+        {% if medical_records %}
+            <ul>
+                {% for record in medical_records %}
+                    <li>
+                        <strong>Date:</strong> {{ record.date }}<br>
+                        <strong>Diagnosis:</strong> {{ record.diagnosis }}<br>
+                        <strong>Treatment:</strong> {{ record.treatment }}<br>
+                        <strong>Test Results:</strong> {{ record.test_results }}<br>
+                        <strong>Doctor Name:</strong> {{ record.doctor_name }}<br>
+                        <strong>Prescription:</strong> {{ record.prescription}}<br>
+                        <strong>medical_tests:</strong> {{ record.medical_tests}}<br>
+                        <strong>Symptoms:</strong> {{ record.symptoms}}<br>
+
+                        
+                        <!-- "Update" button with a link to the update view -->
+                        <a href="{% url 'update_medical_record' record.id %}" class="update-button">Update</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No medical records available for this patient.</p>
+            
+            <!-- "Add Medical Records" button -->
+            <a href="{% url 'add_medical_record' %}" class="add-records-button">Add Medical Records</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
