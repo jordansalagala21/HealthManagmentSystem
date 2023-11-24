@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Patient, MedicalRecord
-from .forms import PatientForm, MedicalRecordForm
+from .models import Patient, MedicalRecord, Appointment, Doctor
+from .forms import PatientForm, MedicalRecordForm, AppointmentForm, DoctorForm
 
 def home(request):
     # Your view logic here
@@ -48,13 +48,14 @@ def update_patient(request, patient_id):
 def delete_patient(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
 
-    if request.method == "POST":
-        confirmed = request.POST.get('confirmed', False)
-        if confirmed:
-            patient.delete()
-            return redirect('view_patients')
+    if request.method == 'POST':
+        print("POST request received")
+        patient.delete()
+        print("Patient deleted")
+        return redirect('view_patients')
 
-    return render(request, 'hmsapp/delete_patient.html', {'patient': patient})
+    return render(request, 'your_app_name/delete_patient.html', {'patient': patient})
+
 
 def view_medical_records(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
@@ -74,3 +75,24 @@ def update_medical_record(request, record_id):
         form = MedicalRecordForm(instance=record)
 
     return render(request, 'hmsapp/update_medical_record.html', {'form': form})
+
+def add_appointment(request):
+    if request.method == "POST":
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_appointments')  # Redirect to the view appointments page
+    else:
+        form = AppointmentForm()
+    return render(request, 'hmsapp/add_appointment.html', {'form': form})
+
+def add_doctor(request):
+    if request.method == "POST":
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_doctors')  # Redirect to the view doctors page after adding a doctor
+    else:
+        form = DoctorForm()
+
+    return render(request, 'hmsapp/add_doctor.html', {'form': form})
