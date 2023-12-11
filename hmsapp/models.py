@@ -31,11 +31,12 @@ class MedicalRecord(models.Model):
     diagnosis = models.TextField()
     treatment = models.TextField()
     test_results = models.TextField()
-    doctor_name = models.CharField(max_length=100, blank=True, null=True)
+    # doctor_name = models.CharField(max_length=100, blank=True, null=True)
     prescription = models.TextField(blank=True, null=True)
     medical_tests = models.TextField(blank=True, null=True)
     follow_up_instructions = models.TextField(blank=True, null=True)
     symptoms = models.TextField(blank=True, null=True)
+    # is_follow_up = models.BooleanField(default=False)
 
 class Doctor(models.Model):
     doctorId = models.AutoField(primary_key=True)
@@ -57,3 +58,11 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"Appointment {self.appID} with {self.patient.first_name} {self.patient.last_name} on {self.app_date}"
+    
+class Billing(models.Model):
+    billID = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    billdate = models.DateField()
+    total_payment = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_mode = models.CharField(max_length=50)
+    insurance = models.BooleanField(default=False)

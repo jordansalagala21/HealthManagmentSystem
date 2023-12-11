@@ -71,6 +71,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-bottom:5px;
         }
 
         button:hover {
@@ -88,6 +89,19 @@
 
         a.view-medical-records:hover {
             background: #27ae60;
+        }
+        a.view-appointments {
+            background: #2ecc71; /* Your preferred color */
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px 10px 0; /* Adjust spacing */
+            display: inline-block; /* Make sure it behaves as a block element */
+        }
+        
+        a.view-appointments:hover {
+            background: #27ae60; /* Your preferred hover color */
         }
     </style>
 </head>
@@ -115,7 +129,7 @@
                     <!-- View Medical Records Button -->
                     <a href="{% url 'view_medical_records' patient.id %}">View Medical Records</a>
                     <!-- Display Medical Records -->
-    
+                    <a href="{% url 'view_appointments' patient.id %}" class="view-appointments">View Appointments</a>
                 </li>
             {% endfor %}
         </ul>

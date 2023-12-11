@@ -1,0 +1,132 @@
+<!-- view_appointments.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Health Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            flex: 1 1 calc(33.3333% - 20px);
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: left;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+        }
+
+        strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        /* Style for the "Update" button */
+        .update-button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .update-button:hover {
+            background: #2980b9;
+        }
+
+        /* Style for the "Add Appointment" button */
+        .add-appointment-button {
+            background: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .add-appointment-button:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Appointments for {{ patient.first_name }} {{ patient.last_name }}</h2>
+        
+        {% if appointments %}
+            <ul>
+                {% for appointment in appointments %}
+                    <li>
+                        <strong>Appointment Date:</strong> {{ appointment.app_date }}<br>
+                        <strong>Doctor:</strong> {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}<br>
+                        <strong>Status:</strong> {{ appointment.status }}<br>
+                        
+                        <!-- "Update" button with a link to the update view -->
+                        <a href="{% url 'update_appointment' appointment.appID %}"class="update-button">Update</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No appointments available for this patient.</p>
+            
+            <!-- "Add Appointment" button -->
+            <a href="{% url 'add_appointment' %}" class="add-appointment-button">Add Appointment</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

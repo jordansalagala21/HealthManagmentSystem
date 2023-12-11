@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Patient, MedicalRecord, Appointment, Doctor
+from .models import Patient, MedicalRecord, Appointment, Doctor, Billing
 
 class PatientForm(forms.ModelForm):
     class Meta:
@@ -11,7 +11,7 @@ class MedicalRecordForm(forms.ModelForm):
     class Meta:
         model = MedicalRecord
         fields = ['patient', 'date', 'diagnosis', 'treatment', 'test_results',
-                  'doctor_name', 'prescription', 'medical_tests', 'follow_up_instructions', 'symptoms']
+                   'prescription', 'medical_tests', 'follow_up_instructions', 'symptoms']
 
 class AppointmentForm(forms.ModelForm):
     class Meta:
@@ -33,3 +33,8 @@ class DeletePatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = []
+
+class BillingForm(forms.ModelForm):
+    class Meta:
+        model = Billing
+        fields = ['patient', 'billdate', 'total_payment', 'payment_mode', 'insurance']

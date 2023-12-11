@@ -1,9 +1,11 @@
+<!-- update_appointment.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Appointment - Health Management System</title>
+    <title>Update Appointment - Health Management System</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,15 +21,19 @@
 
         .form-container {
             max-width: 600px;
-            padding: 60px;
+            padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             color: #333;
             text-align: center;
-            margin-top: 50px;
         }
 
+        .form-content {
+            padding: 20px;
+        }
+
+        /* Style for the form fields */
         form label {
             font-weight: 600;
             text-align: left;
@@ -37,28 +43,29 @@
 
         form input[type="text"],
         form input[type="date"],
-        form select {
+        form textarea {
             width: 100%;
-            padding: 14px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
+            margin-bottom: 15px;
+            background: #f5f5f5;
         }
 
-        form select {
-            appearance: none;
-            padding: 14px;
+        form textarea {
+            resize: vertical;
         }
 
+        /* Style for buttons */
         .btn-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            margin-top: 20px;
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 12px 20px;
             background: #2ecc71;
             color: #fff;
             font-size: 14px;
@@ -71,6 +78,10 @@
             cursor: pointer;
         }
 
+        .btn:first-child {
+            margin-right: 10px;
+        }
+
         .btn:hover {
             background: #27ae60;
         }
@@ -78,21 +89,19 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Book an Appointment</h2>
+        <h2>Update Appointment</h2>
 
-        <form method="post" action="{% url 'add_appointment' %}">
+        <form method="post" class="form-content">
             {% csrf_token %}
-            <label for="id_patient">Patient:</label>
-            {{ form.patient }}
-            <label for="id_doctor">Doctor:</label>
-            {{ form.doctor }}
-            <label for="id_app_date">Appointment Date:</label>
-            {{ form.app_date }}
-            <label for="id_status">Status:</label>
-            {{ form.status }}
+            <!-- Add your form fields here -->
+            <label for="id_date">Date:</label>
+            {{ form.date }}
+            <label for="id_description">Description:</label>
+            {{ form.description }}
 
             <div class="btn-container">
-                <button type="submit" class="btn">Book Appointment</button>
+                <button type="submit" class="btn">Update Appointment</button>
+                <!-- You can add a cancel or go back button here if needed -->
             </div>
         </form>
     </div>
